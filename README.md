@@ -8,11 +8,11 @@ Use `Node.js` and `Express` to build an API that performs _CRUD_ operations on `
 
 ### Task 1: Project Setup
 
-[] import this repository into your account
-[] clone **your copy** of this repository.
-[] **CD into the folder** where you cloned the repository.
-[] Type `npm install` to download all dependencies.
-[] To start the server, type `npm run server` from the root folder (where the _package.json_ file is). The server is configured to restart automatically as you make changes.
+[X] import this repository into your account
+[X] clone **your copy** of this repository.
+[X] **CD into the folder** where you cloned the repository.
+[X] Type `npm install` to download all dependencies.
+[X] To start the server, type `npm run server` from the root folder (where the _package.json_ file is). The server is configured to restart automatically as you make changes.
 
 ### Task 2: Minimum Viable Product
 
