@@ -75,8 +75,29 @@ router.put('/api/posts/:id', (req, res) => {
             console.log(err);
             res.status(500).json({
                 error: "The post information could not be modified."
-            })
+            });
+        });
+});
+
+router.delete('/api/posts/:id', (req, res) => {
+    Lambda.remove(req.params.id)
+        .then(data => {
+            if (data > 0) {
+                res.status(200).json({
+                    message: "The post has been successfully deleted."
+                });
+            } else {
+                res.status(404).json({
+                    message: "The post with the specified ID does not exist."
+                });
+            }
         })
-})
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: "The post could not be removed"
+            });
+        });
+});
 
 module.exports = router;

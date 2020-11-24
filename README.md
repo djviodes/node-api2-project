@@ -111,15 +111,15 @@ When the client makes a `GET` request to `/api/posts/:id/comments`:
 
 When the client makes a `DELETE` request to `/api/posts/:id`:
 
-[] If the _post_ with the specified `id` is not found:
+[X] If the _post_ with the specified `id` is not found:
 
-  [] return HTTP status code `404` (Not Found).
-  [] return the following JSON object: `{ message: "The post with the specified ID does not exist." }`.
+  [X] return HTTP status code `404` (Not Found).
+  [X] return the following JSON object: `{ message: "The post with the specified ID does not exist." }`.
 
-[] If there's an error in removing the _post_ from the database:
-  [] cancel the request.
-  [] respond with HTTP status code `500`.
-  [] return the following JSON object: `{ error: "The post could not be removed" }`.
+[X] If there's an error in removing the _post_ from the database:
+  [X] cancel the request.
+  [X] respond with HTTP status code `500`.
+  [X] return the following JSON object: `{ error: "The post could not be removed" }`.
 
 When the client makes a `PUT` request to `/api/posts/:id`:
 
@@ -128,7 +128,7 @@ When the client makes a `PUT` request to `/api/posts/:id`:
   [X] return HTTP status code `404` (Not Found).
   [X] return the following JSON object: `{ message: "The post with the specified ID does not exist." }`.
 
-[] If the request body is missing the `title` or `contents` property:
+[X] If the request body is missing the `title` or `contents` property:
 
   [X] cancel the request.
   [X] respond with HTTP status code `400` (Bad Request).
