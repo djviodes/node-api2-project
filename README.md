@@ -37,22 +37,22 @@ Configure the API to handle to the following routes:
 
 When the client makes a `POST` request to `/api/posts`:
 
-[] If the request body is missing the `title` or `contents` property:
+[X] If the request body is missing the `title` or `contents` property:
 
-  [] cancel the request.
-  [] respond with HTTP status code `400` (Bad Request).
-  [] return the following JSON response: `{ errorMessage: "Please provide title and contents for the post." }`.
+  [X] cancel the request.
+  [X] respond with HTTP status code `400` (Bad Request).
+  [X] return the following JSON response: `{ errorMessage: "Please provide title and contents for the post." }`.
 
-[] If the information about the _post_ is valid:
+[X] If the information about the _post_ is valid:
 
-  [] save the new _post_ the the database.
-  [] return HTTP status code `201` (Created).
-  [] return the newly created _post_.
+  [X] save the new _post_ the the database.
+  [X] return HTTP status code `201` (Created).
+  [X] return the newly created _post_.
 
-[] If there's an error while saving the _post_:
-  [] cancel the request.
-  [] respond with HTTP status code `500` (Server Error).
-  [] return the following JSON object: `{ error: "There was an error while saving the post to the database" }`.
+[X] If there's an error while saving the _post_:
+  [X] cancel the request.
+  [X] respond with HTTP status code `500` (Server Error).
+  [X] return the following JSON object: `{ error: "There was an error while saving the post to the database" }`.
 
 When the client makes a `POST` request to `/api/posts/:id/comments`:
 
@@ -61,22 +61,22 @@ When the client makes a `POST` request to `/api/posts/:id/comments`:
   [] return HTTP status code `404` (Not Found).
   [] return the following JSON object: `{ message: "The post with the specified ID does not exist." }`.
 
-[] If the request body is missing the `text` property:
+[X] If the request body is missing the `text` property:
 
-  [] cancel the request.
-  [] respond with HTTP status code `400` (Bad Request).
-  [] return the following JSON response: `{ errorMessage: "Please provide text for the comment." }`.
+  [X] cancel the request.
+  [X] respond with HTTP status code `400` (Bad Request).
+  [X] return the following JSON response: `{ errorMessage: "Please provide text for the comment." }`.
 
-[] If the information about the _comment_ is valid:
+[X] If the information about the _comment_ is valid:
 
-  [] save the new _comment_ the the database.
-  [] return HTTP status code `201` (Created).
-  [] return the newly created _comment_.
+  [X] save the new _comment_ the the database.
+  [X] return HTTP status code `201` (Created).
+  [X] return the newly created _comment_.
 
-[] If there's an error while saving the _comment_:
-  [] cancel the request.
-  [] respond with HTTP status code `500` (Server Error).
-  [] return the following JSON object: `{ error: "There was an error while saving the comment to the database" }`.
+[X] If there's an error while saving the _comment_:
+  [X] cancel the request.
+  [X] respond with HTTP status code `500` (Server Error).
+  [X] return the following JSON object: `{ error: "There was an error while saving the comment to the database" }`.
 
 When the client makes a `GET` request to `/api/posts`:
 
