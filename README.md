@@ -56,10 +56,10 @@ When the client makes a `POST` request to `/api/posts`:
 
 When the client makes a `POST` request to `/api/posts/:id/comments`:
 
-[] If the _post_ with the specified `id` is not found:
+[X] If the _post_ with the specified `id` is not found:
 
-  [] return HTTP status code `404` (Not Found).
-  [] return the following JSON object: `{ message: "The post with the specified ID does not exist." }`.
+  [X] return HTTP status code `404` (Not Found).
+  [X] return the following JSON object: `{ message: "The post with the specified ID does not exist." }`.
 
 [X] If the request body is missing the `text` property:
 

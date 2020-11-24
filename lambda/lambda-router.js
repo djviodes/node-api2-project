@@ -20,7 +20,7 @@ router.get('/api/posts', (req, res) => {
 router.get('/api/posts/:id', (req, res) => {
     Lambda.findById(req.params.id)
         .then(data => {
-            if (data) {
+            if (data.length > 0) {
                 res.status(200).json(data);
             } else {
                 res.status(404).json({
@@ -39,7 +39,7 @@ router.get('/api/posts/:id', (req, res) => {
 router.get('/api/posts/:id/comments', (req, res) => {
     Lambda.findPostComments(req.params.id)
         .then(data => {
-            if (!data.length) {
+            if (data.length <= 0) {
                 res.status(404).json({
                     message: "The post with the specified ID does not exist."
                 });
@@ -56,27 +56,36 @@ router.get('/api/posts/:id/comments', (req, res) => {
 });
 
 router.put('/api/posts/:id', (req, res) => {
+    // console.log(req.params.id)
+    // console.log(req.body)
     const changes = req.body;
-    Lambda.update(req.params.id, changes)
-        .then(data => {
-            if (data) {
-                res.status(200).json(data);
-            } else if (!data.title && !data.contents) {
-                res.status(400).json({
-                    errorMessage: "Please provide title and contents for the post."
-                });
-            } else {
-                res.status(404).json({
-                    message: "The post with the specified ID does not exist."
-                });
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: "The post information could not be modified."
-            });
+    if (!req.body.title) {
+        res.status(400).json({
+            errorMessage: "Please provide title for the post."
         });
+    } else if (!req.body.contents) {
+        res.status(400).json({
+            errorMessage: "Please provide contents for the post."
+        });
+    } else {
+        Lambda.update(req.params.id, changes)
+            .then(data => {
+                console.log(data)
+                if (data > 0) {
+                    res.status(200).json(changes);
+                } else {
+                    res.status(404).json({
+                        message: "The post with the specified ID does not exist."
+                    });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    error: "The post information could not be modified."
+                });
+            });
+    }
 });
 
 router.delete('/api/posts/:id', (req, res) => {
