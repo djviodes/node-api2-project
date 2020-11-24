@@ -12,8 +12,45 @@ router.get('/api/posts', (req, res) => {
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                message: err.message,
-                stack: err.stack,
+                error: "The posts information could not be retrieved."
+            });
+        });
+});
+
+router.get('/api/posts/:id', (req, res) => {
+    Lambda.findById(req.params.id)
+        .then(data => {
+            if (data) {
+                res.status(200).json(data);
+            } else {
+                res.status(404).json({
+                    message: "The post with the specified ID does not exist."
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: "The post information could not be retrieved."
+            });
+        });
+});
+
+router.get('/api/posts/:id/comments', (req, res) => {
+    Lambda.findPostComments(req.params.id)
+        .then(data => {
+            if (!data.length) {
+                res.status(404).json({
+                    message: "The post with the specified ID does not exist."
+                });
+            } else {
+                res.status(200).json(data);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: "The comments information could not be retrieved."
             });
         });
 });
