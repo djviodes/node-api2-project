@@ -70,7 +70,6 @@ router.put('/api/posts/:id', (req, res) => {
     } else {
         Lambda.update(req.params.id, changes)
             .then(data => {
-                console.log(data)
                 if (data > 0) {
                     res.status(200).json(changes);
                 } else {
