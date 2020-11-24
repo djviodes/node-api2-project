@@ -4,22 +4,27 @@ const Lambda = require('../data/db');
 const postRouter = express.Router();
 
 postRouter.post('/api/posts', (req, res) => {
-    if (!req.body.title && !req.body.contents) {
+    if (!req.body.title) {
         return res.status(400).json({
-            errorMessage: "Please provide title and contents for the post."
+            errorMessage: "Please provide title for the post."
         });
+    } else if (!req.body.contents) {
+        return res.status(400).json({
+            errorMessage: "Please provide contents for the post."
+        });
+    } else {
+        Lambda.insert(req.body)
+            .then(data => {
+                res.status(201).json(data);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    error: "There was an error while saving the post to the database"
+                });
+            });
     };
 
-    Lambda.insert(req.body)
-        .then(data => {
-            res.status(201).json(data);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: "There was an error while saving the post to the database"
-            });
-        });
 });
 
 postRouter.post('/api/posts/:id/comments', (req, res) => {
@@ -29,15 +34,11 @@ postRouter.post('/api/posts/:id/comments', (req, res) => {
         });
     };
 
-    Lambda.insertComment(req.params.id, req.body)
+    const newComment = { post_id: req.params.id, ...req.body }
+
+    Lambda.insertComment(newComment)
         .then(data => {
-            if (data) {
-                res.status(201).json(data);
-            } else {
-                res.status(404).json({
-                    message: "The post with the specified ID does not exist."
-                });
-            }
+            res.status(201).json(data); 
         })
         .catch(err => {
             console.log(err);
