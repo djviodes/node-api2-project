@@ -55,4 +55,28 @@ router.get('/api/posts/:id/comments', (req, res) => {
         });
 });
 
+router.put('/api/posts/:id', (req, res) => {
+    const changes = req.body;
+    Lambda.update(req.params.id, changes)
+        .then(data => {
+            if (data) {
+                res.status(200).json(data);
+            } else if (!data.title && !data.contents) {
+                res.status(400).json({
+                    errorMessage: "Please provide title and contents for the post."
+                });
+            } else {
+                res.status(404).json({
+                    message: "The post with the specified ID does not exist."
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: "The post information could not be modified."
+            })
+        })
+})
+
 module.exports = router;
