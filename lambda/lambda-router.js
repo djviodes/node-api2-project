@@ -3,6 +3,13 @@ const Lambda = require('../data/db');
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+    res.status(200).json({
+        message: `Welcome ${process.env.COHORT}`,
+        fact: process.env.FUN_FACT || 'I have no fun facts.'
+    });
+});
+
 router.get('/api/posts', (req, res) => {
     console.log(req.query);
     Lambda.find(req.query)
