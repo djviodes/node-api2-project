@@ -5,13 +5,16 @@
     "private": true,
     "main": "index.js",
     "scripts": {
-        "server": "nodemon index.js"
+        "watch": "nodemon --require dotenv/config index.js",
+        "start": "node index.js"
     },
     "dependencies": {
         "knex": "^0.21.2",
         "sqlite3": "^5.0.0"
     },
     "devDependencies": {
+        "cross-env": "^7.0.2",
+        "dotenv": "^8.2.0",
         "nodemon": "^2.0.4"
     }
 }
